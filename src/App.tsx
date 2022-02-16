@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import { GameScreen } from "./GameScreen";
+import { MainMenu } from "./MainMenu";
 
 function App() {
+  
+  const [word, setWord] = React.useState<string>("");
+
+  const setGuessWord = (word: string) => {
+    setWord(word);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App-header">
+        <Routes>
+          <Route path="/game" element={<GameScreen word={word} />} />
+          <Route path="/" element={<MainMenu setWord={setGuessWord} />} />
+        </Routes>
+      </div>
     </div>
   );
 }
